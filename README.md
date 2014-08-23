@@ -1,9 +1,6 @@
 manual-init-loader
 ==================
 
-Emacs extension: manual-init-loader.el --- Manual Init Loader
-
-
 This package, MiLo, is an init config file loader for Emacs, which is easily configurable and
 controllable.
 
