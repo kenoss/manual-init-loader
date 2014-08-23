@@ -70,6 +70,16 @@ For more flexible control, use `milo-preprocess-specs-function'."
 For more flexible control, use `milo-preprocess-specs-function'."
   :group 'milo)
 
+(defcustom milo-pre-load-hook nil
+  "Hooks run when `milo-load' start."
+  :type 'hook
+  :group 'milo)
+
+(defcustom milo-post-load-hook '(milo:inform-error-modestly)
+  "Hooks run when `milo-load' end."
+  :type 'hook
+  :group 'milo)
+
 ;; Logging
 
 (defcustom milo-buffer-name "*milo-log*"
@@ -252,6 +262,7 @@ Supported options:
     If VAL is non-nil, ignore and do nothing when all candidate paths not exist.
     Currently this is only availabre for elisp file."
   (prog1 nil
+    (run-hooks 'milo-pre-load-hook)
     (let ((time (benchmark-elapse
                   (setq milo:buffer (get-buffer-create milo-buffer-name)
                         milo:load-status 'success)
@@ -267,7 +278,8 @@ Supported options:
                         ((eq milo:load-status 'error)
                          (milo:message (propertize "There were errors on the loading.\n"
                                                    'font-lock-face 'milo-failure-face)))))))
-      (milo:message "Total time: %f seconds\n\n\n" time))))
+      (milo:message "Total time: %f seconds\n\n\n" time))
+    (run-hooks 'milo-post-load-hook)))
 
 
 (defmacro milo-lazyload (func library &rest body)
@@ -463,6 +475,16 @@ Supported option:
           (t
            (lwarn 'milo :error "PROGRAM ERROR")
            (error "milo: PROGRAM ERROR")))))
+
+(defun milo:inform-error-modestly ()
+  "Separate window and show error modestly."
+  (interactive)
+  (when (and (eq 'error milo:load-status)
+             (not milo-raise-error))
+    (split-window-horizontally)
+    (other-window 1)
+    (switch-to-buffer milo:buffer)
+    (other-window -1)))
 
 
 
