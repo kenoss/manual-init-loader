@@ -88,6 +88,6 @@ directory.  The following is a part of my config file:
 	      (cons '("\\.\\(scm\\)$" . gauche-mode) auto-mode-alist))
 
 With this config, MiLo loaded files under `~/.emacs.d/init.d`.
-After Emacs init process finishes, `*milo-log*' buffer shows the result.
+After Emacs init process finishes, `*milo-log*` buffer shows the result.
 
 ![log](./images/log.png "log")
