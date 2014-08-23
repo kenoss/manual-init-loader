@@ -45,14 +45,17 @@
 (defcustom milo-file-name-prefix "init-"
   "If non-nil, `milo:load-file' search elisp with this prefix too.
 For more precisely, see `milo:load-file'."
+  :type 'string
   :group 'milo)
 
 (defcustom milo-load-file-function 'milo:load-file
   "Used to load file.  File can not exist."
+  :type 'function
   :group 'milo)
 
 (defcustom milo-preprocess-specs-function 'milo:preprocess-specs
   "For each directory, preprocess specs under it."
+  :type 'function
   :group 'milo)
 
 (defcustom milo-ex-ante-specs '(("preload.el" (@ :only-when-exists t))
@@ -71,18 +74,22 @@ For more flexible control, use `milo-preprocess-specs-function'."
 
 (defcustom milo-buffer-name "*milo-log*"
   "Buffer name used for logging."
+  :type 'string
   :group 'milo)
 
 (defcustom milo-file-name-truncate-function 'file-name-nondirectory
   "Used in `milo:loading-message' to print paths of Emacs Lisp files."
+  :type function
   :group 'milo)
 
 (defcustom milo-raise-error nil
   "Used in `milo:load-file'.  If non-nil, raise an error when `load-file' raise that."
+  :type 'boolean
   :group 'milo)
 
 (defcustom milo-longest-file-name-length 22
   "Used in `milo:loading-message' to print path name."
+  :type 'integer
   :group 'milo)
 
 (defface milo-success-face
