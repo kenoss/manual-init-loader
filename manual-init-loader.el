@@ -89,7 +89,7 @@ For more flexible control, use `milo-preprocess-specs-function'."
 
 (defcustom milo-file-name-truncate-function 'file-name-nondirectory
   "Used in `milo:loading-message' to print paths of Emacs Lisp files."
-  :type function
+  :type 'function
   :group 'milo)
 
 (defcustom milo-raise-error nil
